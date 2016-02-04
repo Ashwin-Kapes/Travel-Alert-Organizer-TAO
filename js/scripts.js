@@ -34,7 +34,7 @@ $(document).ready(function(){
 			var length = data.length;
 			$('.dragger').html('');	
 		for(var x = 0;x < length; x++){
-			html = '<div class="ss-active-child" style="left: 10px; top: 10px;">'
+			html = '<div class="ss-active-child '+data[x]['Tag']+'" style="left: 10px; top: 10px;">'
 			html += '<strong>' + data[x]['Title'] + '</strong><br/>';
 			html += '<span class="label label-info"> Total Reviews: </span>' + data[x]['Review']+ '<br/>';
 			html += '<span class="label label-info"> Rating: </span>' + data[x]['Rating']+ ' of 5<br/>';
@@ -47,7 +47,7 @@ $(document).ready(function(){
 		for(var i=1; i<= Difference;i++){			
 			$('#dropper').append('<div class="col-md-6" id="child_'+i+'"><div class="alert alert-minimal alert-info nomargin"><p><i class="fa fa-info"></i> Day '+i+' Target: </p></div><div class="dragger shapeshifted_container_'+i+' ui-droppable" style="height:122px;min-height:122px;"></div></div>');			
 			}
-			$('#res_msg').html('<div class="alert alert-minimal alert-success nomargin">You have '+Difference+' days and you must visit these '+length+' places in '+Search+'. We have created an organiser, simply drag the place cards and drop to days section. </div><br/><a href="http://localhost/Travel Alert & Organiser TAO/Planner/" class="btn btn-success pull-right"> Refresh for another search </a>');
+			$('#res_msg').html('<div class="col-md-4"><img src="../Img/DragAndDrop.gif" style="width:300px;height:200px;" /></div><div class="col-md-8"><div class="alert alert-minimal alert-success nomargin">You have '+Difference+' days and you must visit these '+length+' places in '+Search+'. We have created an organiser, simply drag the place cards and drop to days section. </div><br/><a href="http://localhost/Travel-Alert-Organiser-TAO/Planner/" class="btn btn-success pull-right"> Refresh for another search </a></div>');
 			$('#js-handle').html('<script type="text/javascript" src="../js/scripts.js"></script>');
 		                     
         })
@@ -121,6 +121,8 @@ $(function(){
           val[i] = $(this).attr('id');
 		  
         });
+		var value = $(this).val();
+
 		//console.log(val);
 		 $.ajax({
             type: 'POST',
@@ -130,12 +132,8 @@ $(function(){
         })
       });
     });
-//
-$(document).ready(function() {
-       $('#sub').click(function(){
-		   console.log('Ready');		 
-		    var demo4 = $('#child_1 strong').html();
-		  console.log(demo4);
-		   });
+//Under Progress
+
+       
 	  
-    })
+	

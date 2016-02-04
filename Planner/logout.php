@@ -2,6 +2,6 @@
 	session_start();
     session_destroy();
     session_unset();
-    header('Location: http://localhost/Travel Alert & Organiser TAO/'); 
+    header('Location: http://localhost/Travel-Alert-Organiser-TAO/'); 
 
 ?>

@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(!isset($_SESSION['users']))
-header('location:http://localhost/Travel Alert & Organiser TAO/');
+header('location:http://localhost/Travel-Alert-Organiser-TAO/');
 else
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -115,10 +115,7 @@ else
                   </input>
                   <input type="checkbox" name="selector[]" class="livedata"id="14" value="Monuments & Statues">
                   Monuments & Statues
-                  </input>
-                  <input type="checkbox" name="selector[]" class="livedata" id="15" value="Monuments & Statues">
-                  Monuments & Statues
-                  </input>
+                  </input>                
                 </div>
               </div>
             </form>
@@ -131,7 +128,7 @@ else
             <div class="dragger" style="max-height:400px;overflow:scroll;"> </div>
           </div>
           <div id="dropper"> </div> <br/>         
-           <button class="btn btn-success pull-right" id="sub"> Submit </button>           
+           <a class="btn btn-success pull-right" id="subs"> Submit </a>           
         </div>
         
         <!--Datepicker end--> 
@@ -146,6 +143,7 @@ else
 </div>
 <!-- END site-container -->
 <div id="js-handle"><script type="text/javascript" src="../js/scripts.js"></script></div>
+
 <?php
 //If file exists with current session then get Interest
 $_FileName = '../store/'.$_SESSION['users'].'.txt';

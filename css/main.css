@@ -1,0 +1,51 @@
+body {
+	
+	position: absolute;
+	font-family: 'Roboto', sans-serif;
+}
+#home-container {
+	position:absolute;
+	width:500px;
+	height:100px;
+	z-index:15;
+	top:50%;
+	left:50%;
+	margin:-100px 0 0 -150px;
+}
+#home-wrapper {
+	background-color: rgba(0, 0, 0, 0.49);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+h2 {
+	padding: 0 20px 10px 20px;
+	font-size: 20px;
+	font-weight: 400;
+}
+.form-control-wrapper {
+	margin: 10px 20px;
+}
+code {
+	padding: 10px;
+	background: #eee!important;
+	display: block;
+	color: #000;
+}
+code > p {
+	font-weight: bold;
+	color: #000;
+	font-size: 1.5em;
+}
+.holder{
+	 margin-right: auto;
+    margin-left: auto;
+	}
+ @media(max-width: 300px) {
+.well {
+	margin : 0
+}
+}
+

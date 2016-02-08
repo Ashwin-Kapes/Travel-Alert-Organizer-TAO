@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(isset($_SESSION['users']))
-header('location:http://localhost/Travel-Alert-Organiser-TAO/Planner');
+header('location: http://www.rimtrip.com/Hackathon2016/Planner');
 else
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -21,7 +21,7 @@ if(isset($_POST['email']) && !empty($_POST['email'])){
 	 $_Email = $_POST['email'];
 	$_SESSION['users']= $_Email;
 	if($_SESSION['users']){
-		header('location:http://localhost/Travel-Alert-Organiser-TAO/Planner/');
+		header('location: http://www.rimtrip.com/Hackathon2016/Planner/');
 		} 
 	}
 ?>

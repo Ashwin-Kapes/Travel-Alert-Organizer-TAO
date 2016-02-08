@@ -106,14 +106,14 @@ a {
 	position: relative;	
 	vertical-align: middle;
 	line-height: 23px;
-	font-size: 15px;
+	font-size: 14px;
 	
 }
 .dragger > div {
-	background-color: rgb(241, 241, 241);
+	background-color: rgba(217, 237, 247, 0.35);
 	position: absolute;
-	height: 160px;
-	width: 265px;
+	height: 130px;
+	width: 255px;
 	cursor:move;
 	-webkit-box-shadow:0 0 20px rgba(0,0,0,0.8);
     -moz-box-shadow:0 0 20px rgba(0,0,0,0.8);
@@ -142,7 +142,17 @@ a {
 	;
 }
 /* MENU */
-
+.tag-box-v4 {
+    border: dashed 1px #bbb;
+}
+.tag-box {
+    padding: 5px;
+    background: #fff;
+    margin-bottom: 2px;
+}
+.tag-box span{
+	margin: 4px;
+	}
 .menu {
 	float: left;
 }
@@ -153,7 +163,14 @@ a {
 .menu a:hover {
 	text-decoration:none;
 }
-
+.ptitle{
+	    color: #000;
+    max-height: 19px;
+    overflow: hidden;
+    margin-left: 12px;
+    margin-bottom: -10px;
+    font-weight: bold;
+	}
 /* RESPONSIVE */
 @media only screen and (max-width: 768px) {
 .site-pusher, .site-container {

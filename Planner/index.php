@@ -1,8 +1,9 @@
 <?php
 session_start();
 if(!isset($_SESSION['users']))
-header('location:http://localhost/Travel-Alert-Organiser-TAO/');
+header('location: http://www.rimtrip.com/Hackathon2016/');
 else
+require_once('../ML.class.php');
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -40,7 +41,6 @@ else
     </header>
     <div class="site-content">
       <div class="container"> 
-        
         <!--Datepicker start-->
         <div class="container well">
           <div class="col-md-12">
@@ -98,10 +98,10 @@ else
                   <input type="checkbox" name="selector[]" class="livedata" id="8" value="Points of Interest & Landmarks">
                   Points of Interest & Landmarks
                   </input>
-                  <input type="checkbox" name="selector[]" class="livedata"id="9" value="Parks">
+                  <input type="checkbox" name="selector[]" class="livedata" id="9" value="Parks">
                   Parks
                   </input>
-                  <input type="checkbox" name="selector[]" class="livedata"id="10" value="Convention Centers">
+                  <input type="checkbox" name="selector[]" class="livedata" id="10" value="Convention Centers">
                   Convention Centers
                   </input>
                   <input type="checkbox" name="selector[]" class="livedata" id="11"value="Factory Outlets">
@@ -115,20 +115,82 @@ else
                   </input>
                   <input type="checkbox" name="selector[]" class="livedata"id="14" value="Monuments & Statues">
                   Monuments & Statues
-                  </input>                
+                  </input>
+                  <input type="checkbox" name="selector[]" class="livedata"id="14" value="Amusement & Theme Parks">
+                  Amusement & Theme Parks
+                  </input>
+                  <input type="checkbox" name="selector[]" class="livedata"id="14" value="Gardens">
+                  Gardens
+                  </input>
+                   <input type="checkbox" name="selector[]" class="livedata"id="14" value="Educational sites">
+                  Educational sites
+                  </input>  
+                  <input type="checkbox" name="selector[]" class="livedata"id="14" value="Neighborhoods">
+                  Neighborhoods
+                  </input>
+                   <input type="checkbox" name="selector[]" class="livedata"id="14" value="Science Museums">
+                  Science Museums
+                  </input>
+                    <input type="checkbox" name="selector[]" class="livedata"id="14" value="Mysterious Sites">
+                  Mysterious Sites
+                  </input>  
+                    <input type="checkbox" name="selector[]" class="livedata"id="14" value="Arenas & Stadiums">
+                  Arenas & Stadiums
+                  </input> 
+                  <input type="checkbox" name="selector[]" class="livedata"id="14" value="Castles">
+                  Castles
+                  </input> 
+                  <input type="checkbox" name="selector[]" class="livedata"id="14" value="Churches & Cathedrals">
+                  Churches & Cathedrals
+                  </input>
+                   <input type="checkbox" name="selector[]" class="livedata"id="14" value="Art Museums">
+                  Art Museums
+                  </input>
+                  <input type="checkbox" name="selector[]" class="livedata"id="14" value="Art Galleries">
+                  Art Galleries
+                  </input>          
                 </div>
               </div>
             </form>
            
           </div>
         </div>
-        <div class="container well"> <span id="res_msg"></span> </div>
+        <div class="container well"> 
+        <span id="res_msg">
+<?php
+$_FileName = '../store/'.$_SESSION['users'].'-Schedule.xml';
+if(file_exists($_FileName)){
+	$xml = simplexml_load_file($_FileName);
+	$D=1;
+	$DD =  $xml['Start'];
+	function nextDate($FirstDate){		
+	$FDate = date('m/d/Y',strtotime($FirstDate . "+1 days"));
+	return $FDate;
+}
+foreach($xml as $items){	
+	echo '<div class="col-md-6"><div class="tag-box tag-box-v4"><h5><strong>Day '.$D.' schedule</strong>:'.$DD.'</h5>';
+	$DD = nextDate($DD);
+	$P = 1;
+foreach($items as $item)
+{	
+    echo '<span class="label label-success">'.$P.'</span>'.$item.'<br/>';
+	$P++;    
+}
+	$D++;
+	echo '</div></div>';
+}
+}
+?>
+        </span> 
+        </div>
         <div class="container well">
           <div id="col-md-12">
             <div class="dragger" style="max-height:400px;overflow:scroll;"> </div>
           </div>
-          <div id="dropper"> </div> <br/>         
-           <a class="btn btn-success pull-right" id="subs"> Submit </a>           
+          <div id="dropper"> </div> <br/>
+              <div class="col-md-12">
+           <a class="btn btn-success pull-right subs"> Submit </a>
+           </div>
         </div>
         
         <!--Datepicker end--> 
@@ -143,17 +205,54 @@ else
 </div>
 <!-- END site-container -->
 <div id="js-handle"><script type="text/javascript" src="../js/scripts.js"></script></div>
-
+<script>
+$('.subs').click(function(){
+	var Diff = $(this).attr('id');
+	var sDate = $('#date-start').val();
+	//console.log(sDate);
+	//console.log(Diff);
+	var Targets = [];
+	var Noempty = false;
+	for(var x = 1; x <= Diff; x++){
+		var arraysOfIds = $('#child_'+x+' div[class="ptitle"]').map(function(){
+                       var z = $(this).html().trim();
+					   //console.log(z);
+					   if(z != null){
+						   Noempty = true;
+						   }
+					   return z;
+                   }).get();
+				  // console.log(arraysOfIds);
+				   Targets.push(arraysOfIds);
+	}
+	//console.log(Targets);
+	if(Noempty){
+		$('.subs').html(' Saving... Refreshing... ');
+ $.ajax({
+            type: 'POST',
+            url: '../Data.php',
+			dataType: 'json',
+			data: { 
+			Targets: JSON.stringify(Targets), 
+			startDate: sDate }          
+        	})
+			location.reload();		
+		}else{
+			return false;
+			}	  
+});
+</script>
 <?php
 //If file exists with current session then get Interest
 $_FileName = '../store/'.$_SESSION['users'].'.txt';
-if(file_exists($_FileName))
+if(file_exists($_FileName)){
 $_FileData =  json_decode(file_get_contents($_FileName));
 echo '<script type="text/javascript">';
-foreach($_FileData as $k => $v){		
-	echo '$("#'.$v.'").prop("checked",true);';	
+foreach($_FileData as $Pkey => $Pvalue){		
+	echo '$("#'.$Pvalue[0].'").prop("checked",true);';	
 	}
-	echo '</script>';	
+	echo '</script>';
+}
 ?>
 </body>
 </html>
